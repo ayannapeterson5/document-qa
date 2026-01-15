@@ -14,11 +14,15 @@ st.write(
 openai_api_key = st.text_input("OpenAI API Key", type="password")
 if not openai_api_key:
     st.info("Please add your OpenAI API key to continue.", icon="🗝️")
-    st.stop
+    st.stop()
 else:
-
-    # Create an OpenAI client.
-    client = OpenAI(api_key=openai_api_key)
+    try:
+        client = OpenAI(api_key=openai_api_key)
+        client.models.list()
+        st.success("API key is valid!")
+    except Exception as e:
+        st.error("Invalid or blocked API key. Please check it and try again.")
+        st.stop()
 
     # Let the user upload a file via `st.file_uploader`.
     uploaded_file = st.file_uploader(
