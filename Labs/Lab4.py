@@ -1,6 +1,13 @@
 import sys
-__import__("pysqlite3")
-sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+
+try:
+    import pysqlite3
+    sys.modules["sqlite3"] = pysqlite3
+except ModuleNotFoundError:
+    raise ModuleNotFoundError(
+        "pysqlite3 is missing. Make sure 'pysqlite3-binary' is in requirements.txt."
+    )
+
 
 import streamlit as st
 from openai import OpenAI
