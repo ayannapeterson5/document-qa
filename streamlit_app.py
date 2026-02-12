@@ -15,3 +15,5 @@ elif choice == "Lab 4":
     exec(open("Labs/Lab4.py").read())
 
 
+exec(open("Labs/Lab4.py").read())
+
